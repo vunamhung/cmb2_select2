@@ -35,7 +35,7 @@
 			},
 		});
 
-		$(".pw_multiselect").each(function() {
+		$(".vnh_multiselect").each(function() {
 			$(this).select2_sortable();
 		});
 
@@ -61,7 +61,7 @@
 				});
 
 			$(newRow)
-				.find(".pw_multiselect")
+				.find(".vnh_multiselect")
 				.each(function() {
 					$("option:selected", this).removeAttr("selected");
 					$(this).select2_sortable();
@@ -80,7 +80,7 @@
 			// Reinitialise the field we previously destroyed
 			$(newRow)
 				.prev()
-				.find(".pw_multiselect")
+				.find(".vnh_multiselect")
 				.each(function() {
 					$(this).select2_sortable();
 				});
@@ -103,7 +103,7 @@
 				});
 			});
 
-			groupWrap.find(".pw_multiselect").each(function() {
+			groupWrap.find(".vnh_multiselect").each(function() {
 				$(this).select2_sortable();
 			});
 		});
@@ -134,7 +134,7 @@
 			// Reinitialise the field we previously destroyed
 			$(newRow)
 				.prev()
-				.find(".pw_multiselect")
+				.find(".vnh_multiselect")
 				.each(function() {
 					$("option:selected", this).removeAttr("selected");
 					$(this).select2_sortable();
