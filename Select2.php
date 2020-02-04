@@ -17,26 +17,34 @@ class Select2 {
 
 	public function enqueue() {
 		wp_enqueue_style('select2', $this->dir_url('libs/select2/select2.min.css'), [], self::SELECT2_VERSION);
-		wp_register_script('select2', $this->dir_url('libs/select2/select2.min.js'), [], self::SELECT2_VERSION);
+		wp_register_script('select2', $this->dir_url('libs/select2/select2.full.min.js'), [], self::SELECT2_VERSION);
 
 		wp_enqueue_style('cmb2-select2', $this->dir_url('css/style.css'), [], '1.0.0');
 		wp_enqueue_script('cmb2-select2', $this->dir_url('js/script.js'), ['jquery', 'select2'], '1.0.0');
 	}
 
-	public function render_select2($field, $field_escaped_value, $field_object_id, $field_object_type, \CMB2_Types $field_type_object) {
+	public function render_select2($field, $field_escaped_value, $field_object_id, $field_object_type, $field_type_object) {
+		if (version_compare(CMB2_VERSION, '2.2.2', '>=')) {
+			$field_type_object->type = new \CMB2_Type_Select($field_type_object);
+		}
+
 		echo $field_type_object->select([
-			'class' => 'pw_select2 pw_select',
+			'class' => 'vnh_select2 vnh_select',
 			'desc' => $field_type_object->_desc(true),
-			'options' => sprintf('<option></option>%s', $field_type_object->concat_items()),
+			'options' => sprintf('<option>%s</option>%s', __('Select and option', 'vnh_textdomain'), $field_type_object->concat_items()),
 			'data-placeholder' => $field->args('attributes', 'placeholder') ?: $field->args('description'),
 		]);
 	}
 
-	public function render_multiselect2($field, $field_escaped_value, $field_object_id, $field_object_type, \CMB2_Types $field_type_object) {
-		$a = $field_type_object->parse_args('pw_multiselect', [
+	public function render_multiselect2($field, $field_escaped_value, $field_object_id, $field_object_type, $field_type_object) {
+		if (version_compare(CMB2_VERSION, '2.2.2', '>=')) {
+			$field_type_object->type = new \CMB2_Type_Select($field_type_object);
+		}
+
+		$a = $field_type_object->parse_args('vnh_multiselect', [
 			'multiple' => 'multiple',
 			'style' => 'width: 99%',
-			'class' => 'pw_select2 pw_multiselect',
+			'class' => 'vnh_select2 vnh_multiselect',
 			'name' => $field_type_object->_name() . '[]',
 			'id' => $field_type_object->_id(),
 			'desc' => $field_type_object->_desc(true),
@@ -117,7 +125,7 @@ class Select2 {
 	}
 
 	public function multiselect2_table_row_class($check) {
-		$check[] = 'pw_multiselect';
+		$check[] = 'vnh_multiselect';
 
 		return $check;
 	}
