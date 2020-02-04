@@ -1,0 +1,20 @@
+{
+    "author": "Vu Nam Hung",
+    "license": "MIT",
+    "scripts": {
+        "postinstall": "node ./node_modules/frontend-dependencies/index.js"
+    },
+    "devDependencies": {
+        "frontend-dependencies": "^1.1.7"
+    },
+    "frontendDependencies": {
+        "packages": {
+            "select2": {
+                "version": "latest",
+                "src": "dist/{css/*.css,js/*.js}",
+                "namespaced": true,
+                "target": "libs"
+            }
+        }
+    }
+}
