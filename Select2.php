@@ -1,6 +1,6 @@
 <?php
 
-namespace vunamhung\cmb2;
+namespace vnh\cmb2;
 
 class Select2 {
 	const SELECT2_VERSION = '4.1.13';
